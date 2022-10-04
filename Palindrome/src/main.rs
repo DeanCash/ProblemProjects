@@ -2,6 +2,7 @@
 
 use std::io;
 use yansi::{Paint, Color};
+use std::collections::BinaryHeap;
 
 static bottom: i32  = 100;
 static top: i32     = 999;
@@ -11,7 +12,7 @@ fn main() {
         Paint::disable();
     }
 
-    let mut palindromes = Vec::<i32>::new();
+    let mut palindromes = BinaryHeap::<i32>::new();
 
     for i in bottom..=top {
         for j in bottom..=top {
@@ -23,7 +24,7 @@ fn main() {
         }
     }
 
-    let largest = palindromes.iter().max().unwrap_or(&-1);
+    let largest = palindromes.pop().unwrap();
     println!("\nThe biggest {} is: {}",
         Paint::new("palindrome").fg(Color::Magenta).bold(),
         Paint::new(largest).fg(Color::Green).bold()
